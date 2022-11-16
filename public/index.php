@@ -4,6 +4,7 @@ $rota = $_SERVER['REQUEST_URI'];
 
 //usando require_once pq esse arquivo é importante e não pode jamais ser duplicado.
 require_once '../src/controller/alunosController.php';
+require_once '../src/connection/conexao.php';
 
 $paginas = [
     '/' => 'inicio',
