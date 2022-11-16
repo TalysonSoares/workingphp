@@ -14,7 +14,7 @@ $paginas = [
 include '../src/views/menu.phtml';
 
 if (false === isset($paginas[$rota])) {
-    echo "Erro 404";
+    include '../src/views/erro404.phtml';
     exit;
 };
 
