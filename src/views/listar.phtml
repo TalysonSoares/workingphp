@@ -1,9 +1,28 @@
-<?php
-
-    echo abrirConexao();
-?>
-
-
 <h1>Pagina de listar</h1>
 
 <hr>
+
+<table class="container table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Matricula</th>
+            <th>Cidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+            foreach ($alunos as $linha) {
+                echo "<tr>
+                <td>{$linha['id']}</td>
+                <td>{$linha['nome']}</td>
+                <td>{$linha['matricula']}</td>
+                <td>{$linha['cidade']}</td>
+                <td></td>
+                <tr>";
+            }
+            ?>
+    </tbody>
+</table>

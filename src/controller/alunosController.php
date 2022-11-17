@@ -26,7 +26,7 @@ function inicio (): void //estamos declarando que essa funcao "nao tem retorno"
 function listar (): void 
 {
     //SELECT TODOS
-    $select = abrirConexao()->query("SELECT * FROM tb_bebidas");
+    $alunos = buscarAlunos();
     include '../src/views/listar.phtml';
 }
 
