@@ -1,0 +1,14 @@
+<h1>Pagina de Editar</h1>
+<hr>
+
+
+<form action="#" method="post">
+    <input type="hidden" name="id" value="<?php  echo $dados["id"]; ?>">
+    <label>Nome</label>
+    <input type="text" name="nome" value="<?php echo $_POST["nome"] ?? $dados["nome"]; ?>">
+    <label>Matricula</label>
+    <input type="text" name="matricula" value="<?php echo $_POST["matricula"] ?? $dados["matricula"]; ?>">
+    <label>cidade</label>
+    <input type="text" name="cidade" value="<?php echo $_POST["cidade"] ?? $dados["cidade"]; ?>">
+    <button type="submit">Editar</button>
+</form>

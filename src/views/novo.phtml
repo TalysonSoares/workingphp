@@ -1,3 +1,20 @@
-<h1>Pagina inicial</h1>
-
+<h1>Novo</h1>
 <hr>
+
+<div class="container ">
+    <form class="form-control " action="#" method="POST">
+        <input class="form-control col-3" type="hidden" name="idalunos"
+            value="<?php echo $_POST["idalunos"] ?? $dados["idalunos"] ?>">
+        <label for="nome">Nome</label>
+        <input class="form-control" type="text" name="nome" value="<?php echo $_POST["nome"] ?? $dados["nome"] ?>">
+
+        <label for="matricula">Matricula</label>
+        <input class="form-control col-3" type="text" name="matricula"
+            value="<?php echo $_POST["matricula"] ?? $dados["matricula"] ?>">
+
+        <label for="cidade">Cidade</label>
+        <input class="form-control" type="text" name="cidade" value="<?php echo $_POST["cidade"] ?? $dados["cidade"] ?>">
+
+        <button class="btn btn-success col-2" style="margin-left:28rem;margin-top:2rem;"type="submit" value="editar">Editar</button>
+    </form>
+</div>

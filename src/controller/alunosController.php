@@ -3,49 +3,69 @@
 //definindo que nesse arquivo será trabalhado os tipos de dados
 declare(strict_types=1);
 
-function soma(float $n1, float $n2): float
-{
-    return $n1 + $n2;
+function renderizar(string $nomeDoArquivo, mixed $dados = null) {
+    include '../src/views/head.phtml';
+    include "../src/views/{$nomeDoArquivo}.phtml";
+    $dados;
+    include '../src/views/foot.phtml';
 }
 
-function welcome(string $nome): string
-{
-    return "Bem vinde {$nome}";
+function redirecionar(string $onde){
+    header("location: {$onde}");
 }
 
-function concat(int $n1, int $n2): string
-{
-    return (string) $n1 . (string) $n2;
-}
 
 function inicio (): void //estamos declarando que essa funcao "nao tem retorno"
 {
-    include '../src/views/inicio.phtml';
+    renderizar("inicio");
+}
+
+function excluir() {
+    $id = $_GET['id']; //recuperando o id que tava na URL
+
+    excluirAluno($id); //pedindo ao repository pra excluir o aluno (nao sabemos como, mas ele vai)
+
+    redirecionar("/listar"); //redirecionando pra pagina de listar
 }
 
 function listar (): void 
 {
-    //SELECT TODOS
     $alunos = buscarAlunos();
-    include '../src/views/listar.phtml';
+    renderizar("listar", $alunos);
+
 }
 
 function novo (): void 
 {
-    //INSERT INTO
-    if(false === empty($_POST)){
-        $nome = $_POST['nome'];
-        $quantidade = $_POST['quantidade'];
+    renderizar("novo");
 
-        $select = "INSERT INTO tb_bebidas (nome, quantidade) VALUES '{$nome}', '{$quantidade}'";
-        $query = abrirConexao()->prepare($select);
-        $query->execute();
+    //se o usuario preencheu o formulario, vai entrar nesse if
+    if (false === empty($_POST)) {
+        $nome = trim($_POST['nome']);
+        $cidade = trim($_POST['cidade']);
+        $matricula = trim($_POST['matricula']);
 
+        if (true === validateForm($nome, $cidade, $matricula)) {
+            novoAluno($nome, $cidade, $matricula);
+            redirecionar('/listar');
+        } 
     }
-    include '../src/views/novo.phtml';
 }
 
 function editar (): void
 {
-    include '../src/views/editar.phtml';
+    $id = $_GET["id"];
+    $aluno = buscarUmAluno($id);
+    renderizar("editar", $aluno);
+    if (false === empty($_POST)) {
+        $nome = trim($_POST['nome']);
+        $cidade = trim($_POST['cidade']);
+        $matricula = trim($_POST['matricula']);
+
+        if (true === validateForm($nome, $cidade, $matricula)) {
+            atualizarAluno($nome, $cidade, $matricula, $id);
+            redirecionar('/listar');
+        } 
+    }
+    
 }
